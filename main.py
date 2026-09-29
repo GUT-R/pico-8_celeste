@@ -22,13 +22,10 @@ while rodando:
         
         if teclas[pygame.K_a]:
                 player_x -= 10
-                break
         if teclas[pygame.K_d]:
                 player_x += 10
-                break
         if teclas[pygame.K_s]:
                 player_y -= 10
-                break
         if teclas[pygame.K_w]:
                 player_y -= 10
 
