@@ -13,7 +13,7 @@ player_speed: float = 10
 
 gravity = 2
 
-floor_h = 40
+floor_h = 80
 floor_y = display.height - floor_h
 
 clock = pygame.Clock()
@@ -26,12 +26,12 @@ def draw_player():
       pygame.draw.rect(display, (255, 255, 255), (player_x, player_y, player_size, player_size))
 
 while rodando:
-    clock.tick(60)
+    clock.tick(24)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             rodando = False
             quit(0)
-    
+       
     teclas = pygame.key.get_pressed()
     
     if teclas[pygame.K_a]:
@@ -45,15 +45,13 @@ while rodando:
 
     if player_y < floor_y - player_size:
         player_y += gravity
-    player_y = min(player_y, floor_y - floor_h)
+    elif player_y > floor_y - player_size:
+        player_y = floor_y - player_size
     
     display.fill((0, 0, 3))
     draw_floor()
     draw_player()
     
-
-    
-
     pygame.display.flip()
     
 
