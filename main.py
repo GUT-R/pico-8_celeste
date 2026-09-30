@@ -9,7 +9,7 @@ rodando = True
 player_size: int = 40
 player_x: float = display.width / 2 - player_size / 2
 player_y: float = display.height / 2 - player_size / 2
-player_speed: float = 80
+player_speed: float = 10
 
 gravity = 2
 
@@ -31,24 +31,28 @@ while rodando:
         if event.type == pygame.QUIT:
             rodando = False
             quit(0)
-        teclas = pygame.key.get_just_pressed()
-        
-        if teclas[pygame.K_a]:
-            player_x -= player_speed
-        if teclas[pygame.K_d]:
-            player_x += player_speed
-        if teclas[pygame.K_s]:
-            player_y += player_speed
-        if teclas[pygame.K_w]:
-            player_y -= player_speed
+    
+    teclas = pygame.key.get_pressed()
+    
+    if teclas[pygame.K_a]:
+        player_x -= player_speed
+    if teclas[pygame.K_d]:
+        player_x += player_speed
+    if teclas[pygame.K_s]:
+        player_y += player_speed
+    if teclas[pygame.K_w]:
+        player_y -= player_speed
 
+    if player_y < floor_y - player_size:
+        player_y += gravity
+    player_y = min(player_y, floor_y - floor_h)
+    
     display.fill((0, 0, 3))
     draw_floor()
     draw_player()
     
 
-    if player_y < floor_y - player_size:
-        player_y += gravity
+    
 
     pygame.display.flip()
     
