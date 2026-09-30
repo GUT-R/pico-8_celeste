@@ -1,16 +1,24 @@
 import pygame
 
 pygame.init()
-tela_lado = int(input("Digite o tamaho da tela : "))
-display = pygame.display.set_mode((tela_lado, tela_lado))
+
+display = pygame.display.set_mode((800, 600))
 
 rodando = True
 
 player_x: int = display.width / 2 - 20
 player_y: int = display.height / 2 - 20
 
+floor_h = 40
+
 clock = pygame.Clock()
 pygame.time.get_ticks()
+
+def draw_floor():
+      pygame.draw.rect(display, (0, 255, 0), (0, display.height - floor_h, display.width, floor_h))
+
+def draw_player():
+      pygame.draw.rect(display, (255, 255, 255), (player_x, player_y, 40, 40))
 
 while rodando:
     clock.tick(60)
@@ -25,12 +33,13 @@ while rodando:
         if teclas[pygame.K_d]:
                 player_x += 10
         if teclas[pygame.K_s]:
-                player_y -= 10
+                player_y += 10
         if teclas[pygame.K_w]:
                 player_y -= 10
 
     display.fill((0, 0, 3))
-    pygame.draw.rect(display, (255, 255, 255), (player_x, player_y, 40, 40))
+    draw_player()
+    draw_floor()
 
     pygame.display.flip()
     
