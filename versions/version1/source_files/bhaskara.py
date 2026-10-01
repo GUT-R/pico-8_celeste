@@ -26,6 +26,7 @@ class QuadraticMovement:
         if self.is_animating:
             y = (self.a * self.current_x**2) + (self.b * self.current_x) + self.current_x
             self.current_x += delta_time
+            
             if self.current_x >= self.b / 5:
                 self.is_animating = False
             return y
