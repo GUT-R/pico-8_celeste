@@ -1,29 +1,6 @@
 import pygame
-
-# Você pesquisou como importart imagens em python?
-# // sim, precisa de uma bibleoteca chamada pillow
-# O pygame resolve sozinho
-# ele lê o binário e exibe direto
-# // entao a funcao que tu tinha escrevido pode pegar cadfa pixel individual?
-# // ou ela le a imagem inteira?
-# // por que se ela le cada pixel individual, ela teria que receber algums parametros como a posicao do pixel como uma tupla
-# Ela lê o arquivo como binário
-# // ou seja? ela vai retornar o que?
-
-# 101001000101010100101010
-# // ok isso era o que eu tava esperando que acontecesse
-# // que bom que e assim e nao um monte de listas com inumeros valors de posicao, com, transparencia, matiz, e outras coisas
-# // queria que o vs code me mostrasse a documentacao certa pra esse metodo
-# Voce quer ler um arquivo de imagem, pixel por pixel?
-# // sim
-# // to vendo a documentacao no GitHub do projeto da comunidade
-# Bro, por favor, so aprende logo como fazer o .blit no pygame
-# // .split(), nao? 
-# blit. É uma função/método que o Pygame usa para colocar uma imagem no buffer
-# // faz sentido
-# // deixa eu fazer minha magica aqui entao
-
 from pygame.math import lerp as larp # // isso aqui? # Sim // kkkkkkkk
+
 pygame.init()
 
 display = pygame.display.set_mode((800, 600))
@@ -85,10 +62,6 @@ while rodando:
         player_x *= player_hyper_speed
         player_y *= player_hyper_speed
     
-    # // eu acho que meu codigo deve funcionar
-    # // nao completo, mas eu acho que ele pode servir como prototipo que eu posso expandir deposi da prova de minora
-    # bro, vou ter q ir já
-    # // ok, eu vou dar commit entao
     if player_y < floor_y - player_size:
         player_y += gravity
     elif player_y > floor_y - player_size:
@@ -122,10 +95,6 @@ def algum_codigo():
     posit_bits      : int = 0
     pixel_sep       : int = 1
     pixel_sep_old   : int = 0
-    # Mano, interpolação linear é algo bizarro
-    # // imagino
-    # // e matematica, entao tinha que ser bizarro (isso e uma reference?)
-    
     channel_red   : list = 0
     channel_green : list = 0
     channel_blue  : list = 0
@@ -143,29 +112,10 @@ def algum_codigo():
             case 2:
                 channel_blue  = byte_cur
                 channel = 0
-                # ta faznd oq agr?
-                # // to fazendo a lista dos bits que eu selecionei
+                # // lista dos bits que eu selecionei
                 # // basicamente, eu to selecionando partes de 8 bits da imagem
                 # // e ai cada uma dessas partes vai corresponder a um channel
                 # // 0 nesse match e o vermelho, 1 o verde, 2 o azul
                 # // quando chegar em 2 volta ao 0 e eu continuo o for para comtinuar para o proximo pixel
-                # // faz sentido?
-                # N, so use o blit do Pygame
-                # // nao vou nao
         
-
     pixel_channel: list = [channel_red, channel_green, channel_blue]
-    
-    # lil bro, faz oq tu achar mais desotimizado
-    # // esse e meu trabalho # (desotimizar)
-    # // bro
-    # // tu ta vendo essa merda?
-    # eu NAO vou analisar esse codigo
-
-    # Faz isso em C btw
-    # // tu faz a importacao?
-    # ss
-    # // ok
-
-    # Quer dizer, eu posso, mas nao devo
-    # // entao eu faco em python mesmo
