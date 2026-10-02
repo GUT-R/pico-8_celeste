@@ -12,8 +12,10 @@ player_x: float     = display.width / 2 - player_size / 2
 player_y: float     = display.height / 2 - player_size / 2
 jump_force: float   = 80
 jump_duration: float = 0.1
-player_speed: float = 20
-player_hyper_speed: float = 100
+player_speed: float = 10
+player_hyper_speed: float = 25
+direction_x = 0
+direction_y = 0
 
 gravity = 6
 
@@ -23,10 +25,26 @@ floor_y = display.height - floor_h
 clock = pygame.Clock()
 
 def draw_floor():
-      pygame.draw.rect(display, (0, 255, 0), (0, floor_y, display.width, floor_h))
+    pygame.draw.rect(display, (0, 255, 0), (0, floor_y, display.width, floor_h))
 
 def draw_player():
-      pygame.draw.rect(display, (255, 255, 255), (player_x, player_y, player_size, player_size))
+        pygame.draw.rect(display, (255, 255, 255), (player_x, player_y, player_size, player_size))
+        match direction_y:
+            case -1:
+                pygame.draw.rect(display, (255, 0, 0), (player_x, player_y, player_size, player_size / 4))
+            case 1:
+                pygame.draw.rect(display, (255, 0, 0), (player_x, player_y + player_size - player_size / 4, player_size, player_size / 4))
+            
+            case _: pass
+        
+        match direction_x:
+            case -1:
+                pygame.draw.rect(display, (255, 0, 0), (player_x, player_y, player_size / 4, player_size))
+            case 1:
+                pygame.draw.rect(display, (255, 0, 0), (player_x + player_size - player_size / 4, player_y, player_size / 4, player_size))
+            
+            case _: pass
+      
 
 larp_atual = 0
 y1 = player_y
@@ -50,25 +68,27 @@ while rodando:
         direction_x = -1
     if teclas[pygame.K_d]:
         direction_x = 1
+    if teclas[pygame.K_w]:
+        direction_y = -1
     if teclas[pygame.K_s]:
         direction_y = 1
-    if teclas[pygame.K_w] and player_y >= floor_y - player_size:
+        player_y += player_speed
+
+    if teclas[pygame.K_h] and player_y >= floor_y - player_size:
         jumping = True
         y1 = player_y
         y2 = player_y - jump_force
         larp_atual = 0
-        direction_y = -1
+    
     if teclas[pygame.K_SPACE]: # DASH!
-        player_x *= player_hyper_speed
-        player_y *= player_hyper_speed
+        player_x += player_hyper_speed * direction_x
+        player_y += player_hyper_speed * direction_y
     
     if player_y < floor_y - player_size:
         player_y += gravity
     elif player_y > floor_y - player_size:
         player_y = floor_y - player_size
 
-
-    
     if jumping:
         larp_atual = larp_atual + delta / jump_duration
         player_y = larp(y1, y2, larp_atual)
@@ -76,8 +96,7 @@ while rodando:
         if larp_atual >= 1.0:
             jumping = False
 
-    player_y *= direction_y
-    player_x *= direction_x
+    player_x += player_speed * direction_x
 
     display.fill((0, 0, 3))
     draw_floor()
@@ -86,8 +105,8 @@ while rodando:
     pygame.display.flip()
 
 def algum_codigo():
-    with open('filename', 'rb') as file:
-        file.read()
+    with open('filename', 'rb') as file: # obs: Dá erro se o arquivo não existir
+        conteudo: bytes = file.read() # type: ignore
     pixel_atual: int = 0
     # esse vai ser o numero que vai guardar a chave correspondente ao nosso pixel
     
