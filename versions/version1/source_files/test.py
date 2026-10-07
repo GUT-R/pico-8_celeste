@@ -32,7 +32,7 @@ while rodando():
     if not moviment.is_animating:
         y = display.height / 2 - h / 2
         moviment.start()
-    y = actual_y - (moviment.update(delta_time=dt) or 0)
+    y = actual_y - (moviment.update(delta_time=dt) or 0) * 10
     
     display.fill((0, 0, 0))
     draw_square()
